@@ -6,7 +6,7 @@ library(leaflet.extras)
 library(rgdal)
 
 # Data Source: https://data.cityofnewyork.us/Environment/DEP-Green-Infrastructure/spjh-pz7h
-greenInf.load <- readOGR("https://data.cityofnewyork.us/api/geospatial/spjh-pz7h?method=export&format=GeoJSON")
+greenInf.load <- st_read("https://data.cityofnewyork.us/api/geospatial/spjh-pz7h?method=export&format=GeoJSON")
 
 icons <- awesomeIconList(
   MS4 = makeAwesomeIcon(icon = "road", library = "fa", markerColor = "gray"),
@@ -71,15 +71,16 @@ server <- function(input, output) {
    greenInfInputs <- reactive({
      greenInf <- greenInf.load 
      
-      greenInf <- subset(greenInf, borough == input$boroSelect)
-     
+     # Boros
+     greenInf <- subset(greenInf, borough == input$boroSelect)
+     # Sewer type
      if (length(input$sewerSelect) > 0) {
        greenInf <- subset(greenInf, sewer_type %in% input$sewerSelect)
      }
      
      return(greenInf)
    })
-   output$table <- DT::renderDataTable(greenInfInputs()@data, options = list(scrollX = T))
+   output$table <- DT::renderDataTable(greenInfInputs(), options = list(scrollX = T))
 }
 
 # Run the application 

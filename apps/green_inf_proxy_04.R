@@ -15,8 +15,8 @@ greenInf.load <- st_read("http://data.cityofnewyork.us/api/geospatial/spjh-pz7h?
 # Load Boros
 boros.load <- st_read("http://data.cityofnewyork.us/api/geospatial/tqmj-j8zm?method=export&format=GeoJSON") 
 # Get centroids and prep to join
-boros.
-cent <- boros.load %>% 
+
+boros.cent <- boros.load %>% 
   st_centroid() %>%  
   mutate(longitude = sf::st_coordinates(.)[,1],
          latitude = sf::st_coordinates(.)[,2]) %>%

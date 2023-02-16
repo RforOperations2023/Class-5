@@ -91,7 +91,7 @@ server <- function(input, output) {
        addAwesomeMarkers(icon = ~icons[sewer_type], popup = ~paste0("<b>", project_na, "</b>: ", sewer_type), group = "greenInf", layerId = ~asset_id)
    })
    # Data Table
-   output$table <- DT::renderDataTable(greenInfInputs()@data, options = list(scrollX = T))
+   output$table <- DT::renderDataTable(greenInfInputs(), options = list(scrollX = T))
    # Print Inputs
    observe({
      print(reactiveValuesToList(input))
