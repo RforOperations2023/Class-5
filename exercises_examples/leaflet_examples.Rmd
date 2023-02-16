@@ -41,7 +41,7 @@ cds <- cds.load %>%
 
 ```{r}
 leaflet() %>%
-  addProviderTiles(providers$Esri.WorldImagery)
+  addProviderTiles("Stamen.Toner")
 ```
 
 # Blank map with no warp
@@ -79,22 +79,9 @@ leaflet(data = rivers) %>%
 ```
 
 # Points
+
 ```{r}
 
-```
-
-## Circle Markers
-
-```{r, markers}
-potholes <- read.csv("311_potholes.csv")
-
-# Custom Palette
-pal311 <- colorFactor(c("#d73027", "#1a9850"), c("Closed", "Open"))
-
-leaflet() %>%
-  addProviderTiles("OpenStreetMap.HOT") %>%
-  addCircleMarkers(data = potholes, lng = ~X, lat = ~Y, radius = 1.5, color = ~pal311(STATUS)) %>%
-  addLegend(position = "topright" , pal = pal311, values = potholes$STATUS, title = "Status")
 ```
 
 ## Points from GEOJSON
